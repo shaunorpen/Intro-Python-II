@@ -65,5 +65,7 @@ while not player.next_move == "q":
         move_to = f"{player.next_move}_to"
         if move_to in dir(player.current_room):
             player.current_room = getattr(player.current_room, move_to)
+        else:
+            print("You can't move in that direction.")
     else:
         print("That's not a valid direction. Please enter n, s, e, w or q to quit the program.")
