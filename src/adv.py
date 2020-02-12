@@ -40,7 +40,7 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-player = Player('outside')
+player = Player(room['outside'])
 
 # Write a loop that:
 #
@@ -52,3 +52,18 @@ player = Player('outside')
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+while not player.next_move == "q":
+    print("*" * 10)
+    print(f"You're currently in the {player.current_room.name}. {player.current_room.description}. What direction would you like to go next?")
+    
+    player.next_move = input().lower()
+
+    if player.next_move == "q":
+        break
+    elif player.next_move in ("n", "s", "e", "w"):
+        move_to = f"{player.next_move}_to"
+        if move_to in dir(player.current_room):
+            player.current_room = getattr(player.current_room, move_to)
+    else:
+        print("That's not a valid direction. Please enter n, s, e, w or q to quit the program.")
