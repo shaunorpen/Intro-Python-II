@@ -80,4 +80,4 @@ while not direction == "q":
     elif direction in ("n", "s", "e", "w"):
         player.move(direction)
     else:
-        print("That's not a valid direction. Please enter n, s, e, w or q to quit the program.")
+        print("That's not a valid direction.")
