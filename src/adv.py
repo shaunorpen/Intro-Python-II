@@ -7,7 +7,7 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons",
+                     "North of you, the cave mount beckons.",
                      [Item("Torch"),]),
 
     'foyer':    Room("Foyer", 
@@ -69,7 +69,7 @@ print("*" * len(welcome_message))
 direction = None
 
 while not direction == "q":
-    print(f"\nYou're currently in the {player.current_room.name}. {player.current_room.description}. Which direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
+    print(f"\nYou're currently in the {player.current_room.name}. {player.current_room.description}\n\nWhich direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
     
     direction = input().lower()
 
