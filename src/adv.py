@@ -8,11 +8,11 @@ from item import Item
 room = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons.",
-                     [Item("Torch"),]),
+                     [Item("torch"), Item("rope"), Item("sandwich")]),
 
     'foyer':    Room("Foyer", 
                      "Dim light filters in from the south. Dusty passages run north and east.",
-                     [Item("Sword")]),
+                     [Item("sword")]),
 
     'overlook': Room("Grand Overlook", "A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm."),
 
@@ -66,23 +66,22 @@ print("*" * len(welcome_message))
 #
 # If the user enters "q", quit the game.
 
-direction = None
+try_again = False
 
-while not direction == "q":
-    print(f"\nYou're currently in the {player.current_room.name}. {player.current_room.description}\n\nWhich direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
+while True:
+
+    if try_again == False:
+        print(f"\nYou're currently in the {player.current_room.name}. {player.current_room.description}")
+        print("\nWhich direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
+    else:
+        print("You can't go that way. Try again!")
     
     direction = input().lower()
 
     if direction == "q":
         break
     elif direction in ("n", "s", "e", "w"):
-        current_room = player.current_room
-        player.move(direction)
-        while current_room == player.current_room:
-            print("\nOops! You can't go that way! Try again.\n")
-            direction = input().lower()
-            if direction == "q":
-                break
-            player.move(direction)
+        try_again = player.move(direction)
     else:
-        print("That's not a valid direction.")
+        try_again = True
+        continue
