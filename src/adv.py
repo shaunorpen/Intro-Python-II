@@ -53,19 +53,17 @@ player = Player(room['outside'])
 #
 # If the user enters "q", quit the game.
 
-while not player.next_move == "q":
+direction = None
+
+while not direction == "q":
     print("*" * 10)
     print(f"You're currently in the {player.current_room.name}. {player.current_room.description}. What direction would you like to go next?")
     
-    player.next_move = input().lower()
+    direction = input().lower()
 
-    if player.next_move == "q":
+    if direction == "q":
         break
-    elif player.next_move in ("n", "s", "e", "w"):
-        move_to = f"{player.next_move}_to"
-        if move_to in dir(player.current_room):
-            player.current_room = getattr(player.current_room, move_to)
-        else:
-            print("You can't move in that direction.")
+    elif direction in ("n", "s", "e", "w"):
+        player.move(direction)
     else:
         print("That's not a valid direction. Please enter n, s, e, w or q to quit the program.")
