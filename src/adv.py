@@ -78,7 +78,7 @@ while True:
         print(f"\nYou're currently in the {player.current_room.name}. {player.current_room.description}")
         
         if len(player.current_room.items) > 0:
-            print(f"\nThis room contains the following items: {', '.join(str(item.name) for item in player.current_room.items)}.")
+            print(f"\nThis room contains the following items: {', '.join(str(item.name) for item in player.current_room.items)}")
 
         if len(player.carrying) > 0:
             print(f"\nYou are carrying the following items: {', '.join(str(item.name) for item in player.carrying)}")
@@ -87,16 +87,17 @@ while True:
     else:
         print("You can't do that. Try again!")
     
-    instruction = input().lower()
+    instruction = input().lower().split()
 
-    if len(instruction) > 1:
-        command = instruction.split()
-
-    if instruction == "q":
+    if instruction[0] == "q":
         clear_screen()
         break
-    elif instruction in ("n", "s", "e", "w"):
-        try_again = player.move(instruction)
+    elif instruction[0] in ("n", "s", "e", "w"):
+        try_again = player.move(instruction[0])
+    elif instruction[0] == 'get':
+        try_again = player.get(instruction[1])
+    elif instruction[0] == 'drop':
+        try_again = player.drop(instruction[1])
     else:
         try_again = True
         continue
