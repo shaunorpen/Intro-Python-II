@@ -14,11 +14,15 @@ room = {
                      "Dim light filters in from the south. Dusty passages run north and east.",
                      [Item("sword")]),
 
-    'overlook': Room("Grand Overlook", "A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm."),
+    'overlook': Room("Grand Overlook", 
+                     "A steep cliff appears before you, falling into the darkness. Ahead to the north, a light flickers in the distance, but there is no way across the chasm."),
 
-    'narrow':   Room("Narrow Passage", "The narrow passage bends here from west to north. The smell of gold permeates the air."),
+    'narrow':   Room("Narrow Passage", 
+                     "The narrow passage bends here from west to north. The smell of gold permeates the air."),
 
-    'treasure': Room("Treasure Chamber", "You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south."),
+    'treasure': Room("Treasure Chamber", 
+                     "You've found the long-lost treasure chamber! Sadly, it has already been completely emptied by earlier adventurers. The only exit is to the south.",
+                     [Item("treasure")]),
 }
 
 
@@ -72,16 +76,18 @@ while True:
 
     if try_again == False:
         print(f"\nYou're currently in the {player.current_room.name}. {player.current_room.description}")
+        if len(player.current_room.items) > 0:
+            print(f"\nThis room contains the following items: {', '.join(str(item.name) for item in player.current_room.items)}.")
         print("\nWhich direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
     else:
         print("You can't go that way. Try again!")
     
-    direction = input().lower()
+    instruction = input().lower()
 
-    if direction == "q":
+    if instruction == "q":
         break
-    elif direction in ("n", "s", "e", "w"):
-        try_again = player.move(direction)
+    elif instruction in ("n", "s", "e", "w"):
+        try_again = player.move(instruction)
     else:
         try_again = True
         continue
