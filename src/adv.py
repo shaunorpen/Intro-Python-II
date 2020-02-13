@@ -71,13 +71,20 @@ print("*" * len(welcome_message))
 direction = None
 
 while not direction == "q":
-    print(f"\n\nYou're currently in the {player.current_room.name}. {player.current_room.description}. Which direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
+    print(f"\nYou're currently in the {player.current_room.name}. {player.current_room.description}. Which direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
     
     direction = input().lower()
 
     if direction == "q":
         break
     elif direction in ("n", "s", "e", "w"):
+        current_room = player.current_room
         player.move(direction)
+        while current_room == player.current_room:
+            print("\nOops! You can't go that way! Try again.\n")
+            direction = input().lower()
+            if direction == "q":
+                break
+            player.move(direction)
     else:
         print("That's not a valid direction.")
