@@ -80,9 +80,12 @@ while True:
             print(f"\nThis room contains the following items: {', '.join(str(item.name) for item in player.current_room.items)}.")
         print("\nWhich direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
     else:
-        print("You can't go that way. Try again!")
+        print("You can't do that. Try again!")
     
     instruction = input().lower()
+
+    if len(instruction) > 1:
+        command = instruction.split()
 
     if instruction == "q":
         break
