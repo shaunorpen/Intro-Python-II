@@ -1,3 +1,4 @@
+import os
 from room import Room
 from player import Player
 
@@ -34,13 +35,27 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# Clear screen util
+
+def clear_screen():
+    os.system('cls' if os.name=='nt' else 'clear')
+
 #
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
 
-player = Player(room['outside'])
+clear_screen()
+
+player_name = input("What's your name?\n\n")
+
+player = Player(player_name, room["outside"])
+
+welcome_message = f"\nThanks, {player.name}. Welcome to your adventure!"
+
+print(welcome_message)
+print("*" * len(welcome_message))
 
 # Write a loop that:
 #
@@ -56,8 +71,7 @@ player = Player(room['outside'])
 direction = None
 
 while not direction == "q":
-    print("*" * 10)
-    print(f"You're currently in the {player.current_room.name}. {player.current_room.description}. What direction would you like to go next?")
+    print(f"\n\nYou're currently in the {player.current_room.name}. {player.current_room.description}. Which direction would you like to go?\n\n[N]orth\n[S]outh\n[E]ast\n[W]est\n\n[Q]uit\n")
     
     direction = input().lower()
 
