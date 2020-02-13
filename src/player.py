@@ -2,9 +2,10 @@
 # currently.
 
 class Player:
-    def __init__(self, name, current_room):
+    def __init__(self, name, current_room, carrying = []):
         self.name = name
         self.current_room = current_room
+        self.carrying = carrying
 
     def move(self, direction):
         if hasattr(self.current_room, f"{direction}_to"):
